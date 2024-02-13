@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jasper.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/annotations-api.jar"/>
+	<classpathentry kind="src" path="WEB-INF/src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/cos.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/itextpdf-5.1.0.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/multipartrequest.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mysql-connector-java-5.0.3-bin.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/pager-taglib.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/spdf_2.9.2-0.1.0-sources.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/spdf.jar"/>
+	<classpathentry kind="output" path="WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,222 @@
+
+<%@page import="model.DB"%>
+<%@page import = "java.sql.*" %>
+<%@ page  import="java.sql.*" errorPage="" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>patient_Profile | Health Record</title>
+	
+	<!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <script src="jquery1.min"></script>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+ <script>
+        function myfun(){
+         
+            var d=document.getElementById("myid").value;
+            var fid = document.getElementById("fid").value;
+            alert("Requested Successfully !!!");
+          
+                 
+           $.ajax({url:"prof_patient?id="+d+"&fid="+fid,success:function(data,ResponseText){
+                 
+           }});
+      
+                   // window.location.href="prof_patient.jsp?id="+d+"&fid="+fid;
+                      //$("#myload").load("prof_patient.jsp?id="+d+"&fid="+fid);
+            
+             
+              
+         
+        }
+        
+        function myfun2(){
+            var sid = document.getElementById("fid").value;
+            window.location.href="requests.jsp?sid="+sid;
+      
+        }
+        
+    </script>
+    <style>
+    table{
+    	margin-left: 239px;
+    }
+    </style>
+</head><!--/head-->
+<%!String dis="";%>
+<%!String cuc="";int myid;%>
+<%
+        String sess =(String)session.getAttribute("id");
+        int id = Integer.parseInt(sess);
+        
+        Statement st = null;
+        Connection cn = null;
+        try{
+            st= DB.control();
+            ResultSet rs = st.executeQuery("select * from patient where id="+id+"");
+           
+            rs.next();
+            int myid = rs.getInt(1);
+        dis = rs.getString(8);
+        cuc = rs.getString(11);
+    %>
+    
+
+<body>
+
+    <header id="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-4">
+                        <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
+                    </div>
+                    <div class="col-sm-6 col-xs-8">
+                       <div class="social">
+                            <ul class="social-share">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                            <div class="search">
+                                <form role="form">
+                                    <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                                    <i class="fa fa-search"></i>
+                                </form>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div><!--/.container-->
+        </div><!--/.top-bar-->
+
+        <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html"><img src="images/logo.jpg" alt="logo"></a>
+                </div>
+				
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        
+                       <li><a href="availtime.jsp">Doctors Available Time</a></li>  
+                       	<li><a href="bill.jsp">Bill Details</a></li>  
+                         <li><a href="index.html">Logout</a></li>                           
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+	</header><!--/header-->
+			<img src='images/photos/patient/<%=rs.getString(13)%>' width="200px" height="200px" style="border:4px solid purple;border-radius:100px;margin-left:30px;margin-top:10px"/>
+    <section id="about-us" >
+          <input type="hidden" name="fid" value='<%=rs.getInt(1)%>' id="fid"/>
+        <table width="381" border="2" align="left" cellpadding="2" cellspacing="2" style="float:left;margin-left:324px;margin-top: -150px;">
+    
+           
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>ID</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getInt(1)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Name</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(2)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>DOB</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(3)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Address</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(4)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Contact</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(5)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Email</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(6)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Gender</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(7)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Disease</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(8)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Consulted Doctor</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(9)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Prescribed Medicine</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(10)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Current Condition</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(11)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Duration</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(12)%></strong></em></font></td></tr>
+            <tr><td width="165"><div align="center"><font size="5" face="Times New Roman, Times, serif"><em><strong>Result</strong></em></font></div></td><td><font size="5" face="Times New Roman, Times, serif"><em><strong><%=rs.getString(14)%></strong></em></font></td></tr>
+        </table>
+       
+    
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+
+
+<%
+String id2 =(String)session.getAttribute("id");
+        int id1 = Integer.parseInt(id2);       
+       
+        try{
+            st= DB.control();
+            ResultSet res = st.executeQuery("select * from patient");        
+%>
+          
+           <table width="381" border="0" align="center" cellpadding="2" cellspacing="2">
+    <tr> 
+         
+          <%
+              while(res.next()){
+                             if((dis.equals(res.getString(8)))||(cuc.equals(res.getString(11)))){
+                                if(res.getInt(1)== id)
+                                    continue;
+                                else
+            %>
+        
+           
+        
+                   <%
+                }
+            }
+        
+%>
+
+<%
+}
+        catch(Exception e){
+            System.out.println(e);
+        }
+%>
+<%
+}
+        catch(Exception e){
+            System.out.println(e);
+        }
+%>
+           </table>
+          
+        </section><!--/about-us-->
+       
+    
+    
+
+    <script src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $('.carousel').carousel()
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+</body>
+</html>
